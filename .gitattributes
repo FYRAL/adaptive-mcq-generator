@@ -16,3 +16,12 @@ __pycache__/
 *.pdf
 *.json
 *.csv
+
+.venv/
+__pycache__/
+*.pt
+*.pkl
+*.zip
+*.pdf
+*.json
+*.csv
