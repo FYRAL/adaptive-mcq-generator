@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: langchain-google-community
+Version: 1.0.2
+Summary: An integration package connecting miscellaneous Google's products and LangChain
+Home-page: https://github.com/langchain-ai/langchain-google
+License: MIT
+Requires-Python: >=3.8.1,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Dist: google-api-core (>=2.17.1,<3.0.0)
+Requires-Dist: google-api-python-client (>=2.122.0,<3.0.0)
+Requires-Dist: grpcio (>=1.62.0,<2.0.0)
+Requires-Dist: langchain-community (>=0.0.28)
+Requires-Dist: langchain-core (>=0.1.33,<0.2)
+Project-URL: Repository, https://github.com/langchain-ai/langchain-google
+Project-URL: Source Code, https://github.com/langchain-ai/langchain-google/tree/main/libs/community
+Description-Content-Type: text/markdown
+
+# langchain-google-community
+
+This package contains the LangChain integrations for Google products that are not part of `langchain-google-vertexai` or `langchain-google-genai` packages.
+
+## Installation
+
+```bash
+pip install -U langchain-google-community
+```
+
