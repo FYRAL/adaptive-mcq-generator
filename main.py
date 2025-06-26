@@ -10,7 +10,7 @@ from PyPDF2 import PdfReader
 
 app = FastAPI()
 
-# --- PDF Extraction ---
+# PDF Extraction 
 def extract_text_from_pdf(pdf_file):
     try:
         reader = PdfReader(pdf_file)
@@ -19,14 +19,14 @@ def extract_text_from_pdf(pdf_file):
         print(f"Error reading PDF: {e}")
         return ""
 
-# --- LLM Setup ---
+
 llm = ChatOpenAI(
     model="gpt-4o",
     openai_api_key=os.getenv("OPENAI_API_KEY"),
     temperature=0.3
 )
 
-# --- Constants ---
+
 MAX_MCQS = 200
 CHUNK_SIZE = 10  # skills per chunk
 
@@ -37,7 +37,7 @@ async def run_crew(file: UploadFile = File(...), num_questions: int = 2):
         if not content:
             raise HTTPException(status_code=400, detail="Failed to extract content from PDF.")
 
-        # --- Step 1: Extract skills per module ---
+        #  Step 1: Extract skills per module 
         skill_agent = Agent(
             role="Skill Extractor",
             goal="Extract key skills per module from the learning content",
@@ -71,7 +71,7 @@ async def run_crew(file: UploadFile = File(...), num_questions: int = 2):
         else:
             skills_data = json.loads(str(skill_output))
 
-        # --- Step 2: Filter and limit skills ---
+        # Step 2: Filter and limit skills 
         filtered_skills = {
             module: skills[:10] for module, skills in skills_data.items()
             if 5 <= len(skills) <= 10
@@ -89,12 +89,12 @@ async def run_crew(file: UploadFile = File(...), num_questions: int = 2):
         total_skills = len(flat_skills)
         total_mcqs_expected = total_skills * num_questions
 
-        # --- Step 3: Chunk skills ---
+        # Step 3: Chunk skills 
         chunks = [
             flat_skills[i:i+CHUNK_SIZE] for i in range(0, len(flat_skills), CHUNK_SIZE)
         ]
 
-        # --- Step 4: Generate MCQs ---
+        # Step 4: Generate MCQs 
         quiz_agent = Agent(
             role="Assessment Generator",
             goal="Generate MCQs from skills and content",
